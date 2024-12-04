@@ -112,7 +112,7 @@ if (isset($_GET['delete'])) {
                             <td><?php echo $fetch_user['id']; ?></td>
                             <td><?php echo $fetch_user['name']; ?></td>
                             <td><?php echo $fetch_user['email']; ?></td>
-                            <td><?php echo 'Giảng viên' ?></td>
+                            <td><?php echo $fetch_user['role'] == 'student' ? 'Học sinh' : 'Giảng viên'  ?></td>
                             <td><?php echo $fetch_user['created_at']; ?></td>
                             <td>
                                 <a href="admin_accounts.php?delete=<?php echo $fetch_user['id']; ?>" class="btn-danger btn-sm" style="padding: 10px; text-decoration: none; font-size: 14px;" onclick="return confirm('Xóa tài khoản này?');">Xóa</a>

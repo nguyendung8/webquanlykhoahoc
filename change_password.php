@@ -4,7 +4,7 @@
    session_start();
 
    // Assuming you're storing user ID in session as 'user_id' for both bệnh_nhan and bac_si
-   $user_id = @$_SESSION['patient_id'] ? @$_SESSION['patient_id'] : @$_SESSION['doctor_id'];
+   $user_id = @$_SESSION['student_id'] ? @$_SESSION['student_id'] : @$_SESSION['teacher_id'];
 
    if(!isset($user_id)){ // Check if the session doesn't have user_id
       header('location:login.php'); // Redirect to login page if session doesn't exist
@@ -16,17 +16,17 @@
         $new_password =  mysqli_real_escape_string($conn, md5($_POST['new_password'])); // Hash the new password
 
         // Check if the old password is correct
-        $checkOldPasswordQuery = "SELECT mat_khau FROM nguoi_dung WHERE id = $user_id";
+        $checkOldPasswordQuery = "SELECT password FROM users WHERE id = $user_id";
         $result = $conn->query($checkOldPasswordQuery);
 
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
-            $hashedPassword = $row["mat_khau"];
+            $hashedPassword = $row["password"];
     
             // Check if the old password matches
             if ($hashedPassword === $old_password) {
                 // Old password is correct, update with the new password
-                $updatePasswordQuery = "UPDATE nguoi_dung SET mat_khau = '$new_password' WHERE id = $user_id";
+                $updatePasswordQuery = "UPDATE users SET password = '$new_password' WHERE id = $user_id";
                 
                 if ($conn->query($updatePasswordQuery) === TRUE) {
                     $message[] = 'Đổi mật khẩu thành công';
@@ -82,7 +82,7 @@
 </head>
 <body>
    
-<?php include 'patient_header.php'; ?>
+<?php include 'student_header.php'; ?>
 <div class="change-password">
     <h1 class="cp-title">Đổi mật khẩu</h1>
     <form method="POST">
@@ -99,6 +99,7 @@
 </div>
 
 <script src="js/script.js"></script>
+<script src="js/slide_show.js"></script>
 
 </body>
 </html>

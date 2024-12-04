@@ -75,6 +75,7 @@ TABLE `payments` (
   `amount` decimal(10,2) NOT NULL,
   `payment_method` varchar(50) NOT NULL,
   `payment_date` datetime DEFAULT current_timestamp()
+  `payment_status` varchar(255) DEFAULT 'Chưa thanh toán'
 )
 
 

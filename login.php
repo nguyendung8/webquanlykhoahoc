@@ -24,7 +24,7 @@ if (isset($_POST['submit'])) { // Xử lý khi người dùng nhấn nút "submi
            // Nếu là giảng viên
              $_SESSION['teacher_name'] = $user['name'];
              $_SESSION['teacher_id'] = $user['id'];
-           header('Location: teacher_dashboard.php'); // Chuyển đến trang giảng viên
+           header('Location: teacher_courses.php'); // Chuyển đến trang giảng viên
            exit();
        } elseif ($user['role'] == 'student') {
            // Nếu là sinh viên
