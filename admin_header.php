@@ -32,6 +32,7 @@
          <a style="text-decoration: none !important;" href="admin_accounts.php">Giảng viên</a>
          <a style="text-decoration: none !important;" href="admin_categories.php">Danh mục khóa học</a>
          <a style="text-decoration: none !important;" href="admin_payments.php">Hóa đơn</a>
+         <a style="text-decoration: none !important;" href="admin_statistical.php">Thống kê</a>
       </nav>
 
       <a style="text-decoration: none" href="logout.php" class="delete-btn">Đăng xuất</a>

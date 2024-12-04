@@ -90,13 +90,17 @@ $result = mysqli_query($conn, $query);
                         <td>
                             <?php if ($row['progress'] == 100) { ?>
                                 <a target="_blank" href="generate_certificate.php?course_id=<?php echo $row['course_id']; ?>" 
-                                class="new-btn btn-success">
-                                Nhận chứng chỉ
+                                    class="btn fs-4 btn-success">
+                                    Nhận chứng chỉ
+                                </a>
+                                <a href="review_form.php?course_id=<?php echo $row['course_id']; ?>" 
+                                    class="btn fs-4 btn-warning">
+                                    Đánh giá
                                 </a>
                             <?php } else { ?>
                                 <a href="student_lessons.php?course_id=<?php echo $row['course_id']; ?>" 
-                                class="new-btn btn-primary">
-                                Vào học
+                                    class="btn fs-4 btn-primary">
+                                    Vào học
                                 </a>
                             <?php } ?>
                         </td>

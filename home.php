@@ -15,7 +15,12 @@ $category_filter = isset($_GET['category']) ? intval($_GET['category']) : 0;
 $price_filter = isset($_GET['price']) ? $_GET['price'] : '';
 $difficulty_filter = isset($_GET['difficulty']) ? mysqli_real_escape_string($conn, $_GET['difficulty']) : '';
 
-$query = "SELECT * FROM `courses` WHERE 1";
+$query = "SELECT 
+              courses.*, 
+              IFNULL(AVG(reviews.rating), 0) AS avg_rating 
+          FROM courses
+          LEFT JOIN reviews ON courses.id = reviews.course_id
+          WHERE 1";
 
 // Tìm kiếm theo tên
 if ($search) {
@@ -42,6 +47,8 @@ if ($price_filter == 'free') {
 if ($difficulty_filter) {
     $query .= " AND `difficulty` = '$difficulty_filter'";
 }
+
+$query .= " GROUP BY courses.id";
 
 $courses = mysqli_query($conn, $query) or die('Query failed');
 
@@ -191,6 +198,24 @@ if (isset($_POST['enroll'])) {
                                     else echo 'Khó';
                                 ?>
                             </p>
+                                <!-- Hiển thị sao trung bình -->
+                            <?php if ($course['avg_rating'] > 0) { ?>
+                                <p class="card-text">
+                                    <strong>Đánh giá:</strong>
+                                    <?php 
+                                        $avg_rating = round($course['avg_rating'], 1); 
+                                        echo "$avg_rating / 5";
+                                    ?>
+                                    <span class="text-warning">
+                                        <?php 
+                                            for ($i = 0; $i < 5; $i++) {
+                                                echo $i < $avg_rating ? '★' : '☆';
+                                            }
+                                        ?>
+                                    </span>
+                                </p>       
+                            <?php } ?>        
+            
                             <button class="new-btn btn-primary" 
                                 data-bs-toggle="modal" 
                                 data-bs-target="#enrollModal<?php echo $course['id']; ?>">
